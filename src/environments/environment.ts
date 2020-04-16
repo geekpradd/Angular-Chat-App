@@ -10,7 +10,8 @@ export const environment = {
     databaseURL: 'https://chatapp-4f896.firebaseio.com',
     projectId: 'chatapp-4f896',
     storageBucket: 'chatapp-4f896.appspot.com'
-}
+},
+SOCKET_ENDPOINT: 'http://localhost:5000/socket'
 };
 
 /*
