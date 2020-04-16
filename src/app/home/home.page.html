@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+
+ <ion-card-title>Hello {{ name }}!  Please select from one of the following users to chat with them: </ion-card-title>
+
+</ion-card-header>
+<ion-card-content>
+  <ion-list id="labels-list">
+    <ion-list-header>Users</ion-list-header>
+
+    <ion-item *ngFor="let person of users" lines="none">
+      <ion-label>{{ person.username }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-card-content>
+
+  </ion-card>
+</ion-content>
