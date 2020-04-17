@@ -14,7 +14,7 @@ export class SignInPage implements OnInit {
   name: string;
 
   login(): void {
-    this.service.setName(this.name).subscribe();
+    this.service.setName(this.name);
     this.router.navigateByUrl('/home');
   }
 

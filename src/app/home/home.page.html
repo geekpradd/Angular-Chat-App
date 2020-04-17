@@ -18,8 +18,8 @@
   <ion-list id="labels-list">
     <ion-list-header>Users</ion-list-header>
 
-    <ion-item *ngFor="let person of users" lines="none">
-      <ion-label>{{ person.username }}</ion-label>
+    <ion-item *ngFor="let user of users" lines="none" (click)="selectedIndex = i" routerDirection="root" [routerLink]="['/chat/' + user.username]">
+      <ion-label>{{ user.username }}</ion-label>
     </ion-item>
   </ion-list>
 </ion-card-content>

@@ -43,9 +43,8 @@ export class AppComponent implements OnInit {
 
   updateSideBar() {
     console.log("updating");
-    this.service.getUsers().subscribe((data: Config) => {
-      this.users = data['users'];
-    });
+    this.users = this.service.getUsers();
+    
   }
   initializeApp() {
     this.platform.ready().then(() => {
@@ -54,7 +53,6 @@ export class AppComponent implements OnInit {
     });
     this.updateSideBar();
     this.subscription = this.source.subscribe(val => this.updateSideBar());
-    
   }
   
 
