@@ -7,25 +7,25 @@ import { interval, Subscription } from 'rxjs';
 })
 export class UsersService {
   url = 'http://localhost:5000/users/';
+  signin = 'http://localhost:5000/signin';
+  signup_url = 'http://localhost:5000/signup'
   name = '';
   users = [];
   subscription: Subscription;
   source = interval(4000);
 
-  setName(data: string){
-    this.name = data;
-    console.log(this.users);
-    console.log(this.name);
-    const names = [];
-    this.users.forEach( (element) => {
-      names.push(element.username);
-    });
-    if (!names.includes(this.name)){
-      this.http.post(this.url, {username: this.name}).subscribe();
-    }  
+  login(user: string, pass: string){
+    return this.http.post(this.signin, {username: user, password: pass});
+  }
+  signup(user: string, pass: string) {
+    return this.http.post(this.signup_url, {username: user, password: pass});
   }
   getName(): string {
     return this.name;
+  }
+  setName(data: string){
+    localStorage.setItem('loggedInUser', data);
+    this.name = data;
   }
   getUsers(): string[] {
     return this.users;
@@ -36,6 +36,13 @@ export class UsersService {
     });
   }
   constructor(private http: HttpClient) { 
+    const data = localStorage.getItem('loggedInUser');
+    if (data===null){
+      this.name = ''; 
+    }
+    else {
+      this.name = data;
+    }
     this.updateUsers();
     this.subscription = this.source.subscribe(val => this.updateUsers());
   }

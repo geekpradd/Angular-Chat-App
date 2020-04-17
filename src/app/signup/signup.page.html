@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Sign In</ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-list>
       <ion-item>
-        <ion-label floating>Enter your username:</ion-label>
+        <ion-label floating>Username:</ion-label>
         <ion-input type="text" [(ngModel)]="name" required=""></ion-input>
       </ion-item>
       <ion-item>
@@ -18,10 +18,10 @@
         <ion-input type="password" [(ngModel)]="password" required=""></ion-input>
       </ion-item>
       <ion-item>
-        <ion-button full round color="secondary" type="submit" (click)="login()">Enter</ion-button>
+        <ion-button full round color="secondary" type="submit" (click)="signup()">Sign Up</ion-button>
       </ion-item>
 
-      <ion-item>Don't have an account? <a routerLink='/signup'>  Sign up here</a></ion-item>
+      <ion-item>Already have an account? <a routerLink='/sign-in'>  Sign in here</a></ion-item>
     </ion-list>
   
 

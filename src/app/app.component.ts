@@ -15,16 +15,17 @@ import { interval, Subscription } from 'rxjs';
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   users = [];
+  name = '';
   subscription: Subscription;
   source = interval(1000);
   public appPages = [
     {
       title: 'Chats',
-      url: '/chats',
+      url: '/home',
       icon: 'mail'
     },
     {
-      title: 'Logout',
+      title: 'Logout ',
       url:  '/logout',
       icon: 'warning'
     }
@@ -44,7 +45,15 @@ export class AppComponent implements OnInit {
   updateSideBar() {
     console.log("updating");
     this.users = this.service.getUsers();
-    
+    this.name = this.service.getName();
+    if (this.name === ''){
+      this.appPages[1].title = 'Login';
+      this.appPages[1].url = '/sign-in';
+    }
+    else {
+      this.appPages[1].title = 'Logout ' + this.name;
+      this.appPages[1].url = '/logout';
+    }
   }
   initializeApp() {
     this.platform.ready().then(() => {

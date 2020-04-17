@@ -2,20 +2,51 @@ from flask import Flask, jsonify, request
 import json
 from common import app, db
 import models
+from passlib.hash import sha256_crypt
+
+def encode(password):
+    return sha256_crypt.hash(password)
 
 @app.route('/users/', methods=['GET', 'POST'])
 def users_endpoint():
-    if request.method == 'POST':
-        data = request.get_json()
-        user = models.User(username=data['username'])
-        # db.session.add(user)
-        # db.session.commit()
     users = models.User.query.all()
     data = [user.to_dict() for user in users]
     response = jsonify({'users': data})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
         
+@app.route('/signin', methods=['POST'])
+def signin():
+    data = request.get_json()
+    user = data['username']
+    userObject = models.User.query.filter_by(username=user).first()
+    statusCode = 0
+    if userObject is None:
+        statusCode = 1
+    else: 
+        password = data['password']
+        status = sha256_crypt.verify(password, userObject.password_hash)
+        if not status:
+            statusCode = 2
+
+    response = jsonify({'code': statusCode})
+    return response
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    statusCode = 1
+    user = data['username']
+    userObject = models.User.query.filter_by(username=user).first()
+    if userObject is None:
+        newuser = models.User(username=user, password_hash=encode(data['password']))
+        db.session.add(newuser)
+        db.session.commit()
+        statusCode = 0
+    response = jsonify({'code': statusCode})
+    return response
+
+
 @app.route('/chats/<user1>/<user2>')
 def get_chats(user1, user2):
     chats = list(filter(lambda chat: chat.user1 == user1 and chat.user2 == user2, models.Chat.query.all()))
