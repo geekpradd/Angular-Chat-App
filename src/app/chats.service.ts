@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from './users.service';
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatsService {
-  url = 'http://localhost:5000/chats/';
-  urlSend = 'http://localhost:5000/updatechat/';
+  url = environment.URL + '/chats/';
+  urlSend = environment.URL + '/updatechat/';
   person1;
   person2;
   setChatPerson(user: string){

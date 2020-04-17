@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  URL: 'http://geekpradd.pythonanywhere.com',
   production: false,
   firebaseConfig: {
     apiKey: 'AIzaSyBO6aoiNW7DKWxUXfcqL0rfiwfGNFMzCQs',

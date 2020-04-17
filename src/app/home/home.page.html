@@ -18,7 +18,7 @@
   <ion-list id="labels-list">
     <ion-list-header>Users</ion-list-header>
 
-    <ion-item *ngFor="let user of users" lines="none" (click)="selectedIndex = i" routerDirection="root" [routerLink]="['/chat/' + user.username]">
+    <ion-item *ngFor="let user of users" lines="none" routerDirection="root" [routerLink]="['/chat/' + user.username]">
       <ion-label>{{ user.username }}</ion-label>
     </ion-item>
   </ion-list>

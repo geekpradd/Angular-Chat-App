@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  url = 'http://localhost:5000/users/';
-  signin = 'http://localhost:5000/signin';
-  signup_url = 'http://localhost:5000/signup'
+  url = environment.URL + '/users/';
+  signin = environment.URL + '/signin';
+  signup_url = environment.URL + '/signup';
   name = '';
   users = [];
   subscription: Subscription;
